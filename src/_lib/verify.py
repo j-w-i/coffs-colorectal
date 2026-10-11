@@ -7,7 +7,7 @@ the safety and accessibility elements are present. Exits non-zero on any
 failure, so a broken build never reaches GitHub Pages.
 
     python3 src/_lib/verify.py dist /coffs-colorectal \
-        https://jwimaster.github.io/coffs-colorectal/
+        https://j-w-i.github.io/coffs-colorectal/
 """
 
 import pathlib

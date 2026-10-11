@@ -14,9 +14,9 @@ anywhere, including a simple shared host or an object store.
 
 ## Deployment
 
-The site is live at **https://jwimaster.github.io/coffs-colorectal/**
+The site is live at **https://j-w-i.github.io/coffs-colorectal/**
 
-Repository: https://github.com/JWIMaster/coffs-colorectal
+Repository: https://github.com/j-w-i/coffs-colorectal
 
 GitHub Actions builds and deploys on every push to `main`
 (`.github/workflows/deploy-pages.yml`). Nothing is committed as build output:
@@ -150,7 +150,7 @@ canonical URL for each page is the one expected.
 
 ```bash
 node build.mjs --base=/coffs-colorectal --out=dist
-python3 src/_lib/verify.py dist /coffs-colorectal https://jwimaster.github.io/coffs-colorectal/
+python3 src/_lib/verify.py dist /coffs-colorectal https://j-w-i.github.io/coffs-colorectal/
 ```
 
 ---
