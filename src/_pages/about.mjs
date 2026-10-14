@@ -93,7 +93,7 @@ function bioPage() {
 
       <aside class="profile__facts">
         <div class="panel">
-          <h2 style="font-size:var(--step-1)">Qualifications and accreditation</h2>
+          <h2>Qualifications and accreditation</h2>
           <dl class="deflist" style="margin-top:var(--space-xs)">
             <div><dt>Fellowship</dt><dd>FRACS, Royal Australasian College of Surgeons, general surgery (2006)</dd></div>
             <div><dt>Post-fellowship training</dt><dd>Colorectal surgery, CSSANZ training program</dd></div>

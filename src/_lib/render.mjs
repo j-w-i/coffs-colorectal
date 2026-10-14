@@ -258,7 +258,9 @@ const applyBase = (html) =>
   BASE
     ? html
         .replace(/(href|src)="\/(?!\/)/g, `$1="${BASE}/`)
-        .replace(/(srcset|imagesrcset)="\/(?!\/)/g, `$1="${BASE}/`)
+        .replace(/(srcset|imagesrcset)="([^"]*)"/g, (_m, attr, list) =>
+          `${attr}="${list.replace(/(^|,\s*)\/(?!\/)/g, `$1${BASE}/`)}"`,
+        )
     : html;
 
 function renderFooter(currentUrl) {

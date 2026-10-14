@@ -10,10 +10,14 @@ Clinical, calm and easy to navigate. Public Sans, blue-teal actions, cool white
 surfaces and clear rules preserve the practice identity. Spacing and weight
 establish hierarchy; restrained borders and shadows distinguish reference panels.
 
-The homepage leads with a plain introduction beside a surgeon profile. The coast
-photograph has its own panoramic strip rather than sitting behind text. Patient
-pathways give symptoms a wider, tinted entry and keep the other destinations
-compact. Phone layouts stack the introduction, full-width actions and profile.
+Every page is bookended by one deep teal band (`--band`): the home hero, each page
+header and the footer. Light content sits between. The homepage leads with a plain
+introduction beside a surgeon profile card. Patient pathways are bordered
+tiles, with "I have symptoms" as a full-width deep tile because it is the entry most
+people need. The two local photographs sit beside the practice description.
+Support panels sit beside the reading column on desktop and follow it on phones.
+Index lists are contained in one bordered surface. No gradients, no tinted washes,
+no decorative rules above headings.
 
 ## Colour
 

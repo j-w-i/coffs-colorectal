@@ -210,9 +210,9 @@ h4 {
 
 h1 {
   font-size: var(--step-4);
-  font-weight: 800;
-  letter-spacing: -0.028em;
-  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
 }
 
 h2 {
@@ -241,7 +241,7 @@ li {
   line-height: 1.55;
   color: var(--text-muted);
   text-wrap: pretty;
-  max-width: 42ch;
+  max-width: 56ch;
 }
 
 /* Group labels.
@@ -301,6 +301,7 @@ main {
 
 .section--sunken {
   background: var(--bg-sunken);
+  border-block: 1px solid var(--border);
 }
 
 .stack > * + * {
@@ -324,34 +325,39 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 }
 
-/* A long reading column paired with a short support panel. As two columns this
-   left the dead space of whichever side was shorter, which measured 1,200 to
-   1,425px on the visit pages: the prose ran 2,300px against a 1,090px panel, and
-   no column width can close that. The prose takes the full width and the support
-   panels flow underneath it, arranged across the row. */
+/* A reading column with its supporting panels beside it. The aside is a stack of
+   panels that top-aligns with the prose; below 62rem it simply follows it. */
+.grid--main-side {
+  align-items: start;
+}
+
+.grid--main-side > :not(.prose):not(.card):not(.panel):not(figure) {
+  display: grid;
+  gap: var(--space-m);
+  align-content: start;
+}
+
 @media (min-width: 62rem) {
   .grid--main-side {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  /* Group several sibling panels into a row beneath the prose.
-     Scoped away from .card deliberately: a card is one self-contained object
-     whose text should stay in a single column. Without this exclusion the
-     selector (specificity 0,2,0) beat .card (0,1,0) and laid the card's four
-     CHILDREN out as three columns, stranding its button in a 400px void. */
-  .grid--main-side > :not(.prose):not(.card) {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-    gap: var(--space-m);
-    align-items: start;
-    margin-block-start: var(--space-m);
-  }
-
-  .grid--main-side > .card {
-    margin-block-start: var(--space-m);
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 25rem);
+    gap: var(--space-2xl);
   }
 }
 
+.contact-grid {
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.h-section {
+  font-size: var(--step-2);
+}
+
+.panel > div + div {
+  margin-block-start: var(--space-m);
+  padding-block-start: var(--space-m);
+  border-block-start: 1px solid var(--border);
+}
 
 .section-head {
   display: flex;
@@ -366,6 +372,10 @@ main {
   max-width: 46rem;
 }
 
+.section-head p {
+  line-height: 1.6;
+}
+
 /* --------------------------------------------------------------------------
    5. Translucent chrome (header)
    A floating functional layer: content scrolls underneath rather than being
@@ -376,8 +386,8 @@ main {
   inset-block-start: 0;
   z-index: 100;
   background: var(--chrome-bg);
-  -webkit-backdrop-filter: blur(22px) saturate(180%);
-  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   /* Scroll edge effect instead of a hard divider: only really visible once
      content is actually passing beneath. */
   box-shadow: 0 1px 0 var(--chrome-border);
@@ -535,28 +545,39 @@ main {
 /* The wordmark needs roughly 200px beside three actions. Below that it wraps to
    four lines and inflates the header, so it is replaced by the mark alone, which
    carries the same accessible name via the link's aria-label. */
-@media (max-width: 27.5rem) {
-  .brand__text { display: flex; }
-  .brand__name { font-size: 0.82rem; max-inline-size: 10rem; line-height: 1.2; }
-  .brand__sub { display: none; }
-  .chrome__inner { gap: 0.4rem; }
-  .chrome__actions { gap: 0.15rem; }
-  .brand { gap: 0.5rem; }
-  .brand__mark { display: none; }
+@media (max-width: 34rem) {
+  .brand__sub {
+    display: none;
+  }
+
+  .brand__name {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+
+  .brand {
+    gap: 0.5rem;
+    min-inline-size: 0;
+  }
 
   .brand__mark {
-    inline-size: 2.6rem;
-    block-size: 2.6rem;
+    inline-size: 2.2rem;
+    block-size: 2.2rem;
+  }
+
+  .chrome__inner {
+    gap: 0.35rem;
+  }
+
+  .chrome__actions {
+    gap: 0.1rem;
   }
 }
 
-@media (min-width: 27.5rem) and (max-width: 34rem) {
+@media (max-width: 23rem) {
   .brand__name {
-    font-size: 0.92rem;
-  }
-
-  .brand__sub {
-    display: none;
+    font-size: 0.8rem;
+    max-inline-size: 7.5rem;
   }
 }
 
@@ -585,9 +606,13 @@ main {
 /* Headings that contain an icon line the two up. */
 :is(h2, h3):has(> svg) {
   display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+:is(h2, h3) > svg {
+  margin-block-start: 0.12em;
+  margin-inline-end: 0 !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -614,6 +639,17 @@ main {
   transition: transform var(--dur-instant) var(--ease-out),
     background-color var(--dur-fast) var(--ease-out),
     box-shadow var(--dur-fast) var(--ease-out);
+}
+
+@media (max-width: 30rem) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+  }
+
+  .call-btn__text {
+    white-space: nowrap;
+  }
 }
 
 .btn:hover {
@@ -854,136 +890,232 @@ h3 > svg {
 }
 
 /* --------------------------------------------------------------------------
-   8. Hero
+   8. Deep band, hero
+   Page headers, the home hero and the footer share one deep teal, so every page
+   is bookended by the same colour and the light content sits between.
    -------------------------------------------------------------------------- */
-/* A calm introduction, with a separate reference panel for the surgeon. */
-.hero {
-  background: var(--bg);
-  padding-block: clamp(2.5rem, 5vw, 5rem);
+.band {
+  background: var(--band);
+  color: var(--band-text);
 }
+
+.band h1,
+.band h2,
+.band h3 {
+  color: var(--band-text);
+}
+
+.band a:not(.btn) {
+  color: var(--band-link);
+}
+
+.band a:not(.btn):hover {
+  color: #fff;
+}
+
+:root .band :focus-visible,
+:root[data-theme] .band :focus-visible {
+  outline-color: var(--band-focus);
+  box-shadow: 0 0 0 6px var(--band);
+}
+
+/* Buttons that sit on the band invert: white fill, deep text. */
+.band .btn--primary {
+  --btn-bg: #ffffff;
+  --btn-fg: #0b3440;
+  box-shadow: none;
+}
+
+.band .btn--primary:hover {
+  background: #e2eff3;
+  color: #0b3440;
+}
+
+.band .btn--ghost {
+  --btn-fg: #ffffff;
+  border-color: rgb(255 255 255 / 0.5);
+}
+
+.band .btn--ghost:hover {
+  background: rgb(255 255 255 / 0.12);
+  color: #ffffff;
+}
+
+.hero {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
 .hero__inner {
   display: grid;
   gap: var(--space-xl);
   align-items: center;
 }
+
 .hero h1 {
-  max-inline-size: 19ch;
-  font-size: clamp(2.25rem, 3.8vw, 3.65rem);
-  line-height: 1.12;
-  letter-spacing: -0.045em;
+  max-inline-size: 18ch;
+  font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
 }
+
 .hero .lede {
-  color: var(--text-muted);
-  font-size: var(--step-0);
-  max-inline-size: 54ch;
-  line-height: 1.7;
+  color: var(--band-muted);
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  max-inline-size: 50ch;
+  line-height: 1.65;
 }
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-xs);
   margin-block-start: var(--space-l);
 }
+
 .hero__links {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-m);
+  gap: var(--space-xs) var(--space-m);
   margin-block-start: var(--space-m);
-  font-size: 0.93rem;
+  font-size: 0.95rem;
 }
+
 .hero__links a {
   font-weight: 600;
-  text-decoration-color: var(--border-strong);
+  text-decoration-color: rgb(255 255 255 / 0.35);
 }
+
 .hero__panel {
   background: var(--surface);
-  border: 1px solid var(--border);
+  color: var(--text);
   border-radius: var(--radius-l);
-  padding: clamp(1.25rem, 2.5vw, 2rem);
-  box-shadow: var(--shadow-m);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 18px 40px rgb(0 0 0 / 0.22);
 }
+
 .hero__surgeon {
   display: flex;
   gap: var(--space-s);
   align-items: center;
 }
+
 .hero__surgeon img {
-  inline-size: 5rem;
-  block-size: 5rem;
+  inline-size: 4.75rem;
+  block-size: 4.75rem;
   flex: none;
 }
-.hero__panel h2 {
+
+.band .hero__panel h2 {
+  color: var(--text);
   font-size: 1.25rem;
   line-height: 1.3;
   letter-spacing: -0.02em;
 }
+
 .hero__surgeon p {
   color: var(--text-muted);
-  margin-block-start: 0.25rem;
+  margin-block-start: 0.2rem;
 }
+
 .hero__facts {
   display: grid;
-  gap: var(--space-s);
+  gap: 0.8rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
 .hero__facts li {
   display: flex;
   align-items: flex-start;
   gap: 0.65rem;
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: 0.92rem;
+  line-height: 1.5;
   color: var(--text-muted);
 }
+
 .hero__facts svg {
   inline-size: 1.05rem;
   block-size: 1.05rem;
   flex: none;
-  margin-block-start: 0.18rem;
+  margin-block-start: 0.15rem;
   color: var(--brand-text);
 }
+
 .hero__divider {
   block-size: 1px;
   background: var(--border);
   margin-block: var(--space-m);
 }
-.hero__panel-link {
+
+.band .hero__panel a.hero__panel-link {
+  color: var(--brand-text);
   min-block-size: 2.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-xs);
-  font-size: 0.9rem;
+  font-size: 0.93rem;
   font-weight: 600;
   text-decoration: none;
+  margin-block-end: -0.5rem;
 }
-.hero__panel-link svg { inline-size: 1rem; block-size: 1rem; flex: none; }
-.coast-banner { position: relative; background: var(--ink-800); }
-.coast-banner__media img { inline-size: 100%; block-size: auto; }
-.coast-banner__caption {
-  position: absolute;
-  inset-block-end: var(--space-m);
-  inset-inline: 0;
-  color: #fff;
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-shadow: 0 1px 4px #000;
+
+.band .hero__panel a.hero__panel-link:hover {
+  color: var(--brand-hover);
+  text-decoration: underline;
 }
-.coast-banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(transparent 40%, rgb(8 22 28 / 0.78));
+
+.hero__panel-link svg {
+  inline-size: 1rem;
+  block-size: 1rem;
+  flex: none;
 }
-.coast-banner__caption { z-index: 1; }
+
 @media (min-width: 60rem) {
-  .hero__inner { grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.9fr); gap: clamp(2rem, 5vw, 5rem); }
+  .hero__inner {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 5vw, 5rem);
+  }
 }
+
 @media (max-width: 40rem) {
-  .hero__actions { flex-direction: column; align-items: stretch; }
-  .coast-banner__caption { inset-block-end: 0.6rem; font-size: 0.75rem; }
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
+
+/* Home: the practice, with the two photographs set beside the copy. */
+.about-split {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (min-width: 62rem) {
+  .about-split {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+  }
+}
+
+.about-split__media {
+  display: grid;
+  gap: var(--space-m);
+}
+
+.about-split__media figure {
+  margin: 0;
+}
+
+.about-split__media figcaption {
+  margin-block-start: 0.5rem;
+  font-size: var(--step--1);
+  color: var(--text-subtle);
+  line-height: 1.45;
+}
+
 
 /* --------------------------------------------------------------------------
    9. Cards & panels
@@ -992,7 +1124,7 @@ h3 > svg {
   background-color: var(--surface);
   background-image: var(--wash-surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-s);
+  border-radius: var(--radius-m);
   box-shadow: var(--shadow-panel);
   padding: var(--space-m);
 }
@@ -1013,11 +1145,36 @@ h3 > svg {
   background-color: var(--surface);
   background-image: var(--wash-surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-s);
+  border-radius: var(--radius-m);
   box-shadow: var(--shadow-panel);
   padding: var(--space-m);
 }
 
+.panel h2,
+.panel h3,
+.card h2,
+.card h3 {
+  font-size: var(--step-1);
+  line-height: 1.25;
+}
+
+.panel p,
+.card p {
+  margin-block-start: 0.5rem;
+}
+
+.panel ul,
+.card ul {
+  margin-block-start: 0.6rem;
+  padding-inline-start: 1.2rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.panel li::marker,
+.card li::marker {
+  color: var(--brand);
+}
 
 /* --------------------------------------------------------------------------
    9b. Editorial index
@@ -1027,18 +1184,25 @@ h3 > svg {
    container, and a page built from them flattens everything to one weight.
    -------------------------------------------------------------------------- */
 .index {
-  border-block-start: 1px solid var(--border);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  overflow: hidden;
 }
 
 .index__row {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 0.35rem var(--space-l);
-  padding: var(--space-s);
+  padding: var(--space-s) var(--space-m);
   border-block-end: 1px solid var(--border);
   text-decoration: none;
   color: var(--text);
   position: relative;
+}
+
+.index__row:last-child {
+  border-block-end: 0;
 }
 
 @media (min-width: 46rem) {
@@ -1048,7 +1212,8 @@ h3 > svg {
     grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
     align-items: baseline;
     gap: var(--space-xl);
-    padding-block: var(--space-m);
+    padding-block: 1.25rem;
+    padding-inline: var(--space-l);
   }
 }
 
@@ -1111,8 +1276,7 @@ h3 > svg {
 /* A focus ring that follows the whole row rather than the title alone. */
 .index__row:focus-visible {
   outline: 3px solid var(--focus);
-  outline-offset: 4px;
-  border-radius: var(--radius-xs);
+  outline-offset: -3px;
 }
 
 /* --------------------------------------------------------------------------
@@ -1123,39 +1287,28 @@ h3 > svg {
    -------------------------------------------------------------------------- */
 .routemap {
   display: grid;
-  gap: var(--space-l);
+  gap: var(--space-s);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-}
-
-@media (min-width: 52rem) {
-  .routemap {
-    grid-template-columns: repeat(6, 1fr);
-  }
-  .route--primary {
-    grid-column: span 4;
-  }
-  .route:not(.route--primary) {
-    grid-column: span 2;
-  }
-  .route--primary { flex-direction: row; align-items: center; gap: var(--space-l); }
-  .route--primary .route__label { flex: 1; }
-  .route--primary .route__text { flex: 1.4; }
 }
 
 .route {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  padding: var(--space-m) 0;
-  border-block-start: 2px solid var(--border);
+  gap: 0.45rem;
+  padding: var(--space-m);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
   text-decoration: none;
   color: var(--text);
   transition: border-color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
     transform var(--dur-instant) var(--ease-out);
 }
 
 .route:hover {
-  border-block-start-color: var(--brand);
+  border-color: var(--brand);
+  background: var(--brand-quiet);
   color: var(--text);
 }
 
@@ -1169,28 +1322,21 @@ h3 > svg {
   letter-spacing: -0.015em;
   line-height: 1.28;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
 }
 
-.route--primary .route__label {
-  font-size: var(--step-2);
-  letter-spacing: -0.02em;
-}
-
-.route--primary {
-  padding: var(--space-m);
-  background: var(--brand-quiet);
-  border-color: var(--brand);
-  border-radius: 0 0 var(--radius-s) var(--radius-s);
-}
-
 .route__label svg {
-  inline-size: 0.9rem;
-  block-size: 0.9rem;
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
   flex: none;
   color: var(--brand-text);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.route:hover .route__label svg {
+  transform: translateX(3px);
 }
 
 .route__text {
@@ -1201,15 +1347,72 @@ h3 > svg {
   max-width: 58ch;
 }
 
+/* The entry point most people need: the deep band colour, full width. */
+.route--primary {
+  background: var(--band);
+  border-color: var(--band);
+  color: var(--band-text);
+  padding: var(--space-l);
+}
+
+.route--primary:hover {
+  background: var(--band-raised);
+  border-color: var(--band-raised);
+  color: var(--band-text);
+}
+
+.route--primary .route__label {
+  font-size: var(--step-2);
+  letter-spacing: -0.02em;
+}
+
+.route--primary .route__label svg {
+  color: var(--band-text);
+  inline-size: 1.4rem;
+  block-size: 1.4rem;
+}
+
 .route--primary .route__text {
+  color: var(--band-muted);
   font-size: var(--step-0);
-  max-width: 68ch;
+  max-width: 62ch;
 }
 
 .route:focus-visible {
   outline: 3px solid var(--focus);
-  outline-offset: 4px;
-  border-radius: var(--radius-xs);
+  outline-offset: 3px;
+}
+
+/* Declared after the base rules so it wins the cascade. Six columns let three
+   routes sit above two wider ones with no orphan. */
+@media (min-width: 52rem) {
+  .routemap {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-m);
+  }
+
+  .route {
+    grid-column: span 2;
+  }
+
+  .route:nth-child(n + 5) {
+    grid-column: span 3;
+  }
+
+  .route.route--primary {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .route--primary .route__label {
+    flex: 0 0 22rem;
+  }
+
+  .route--primary .route__text {
+    flex: 1;
+  }
 }
 
 /* A label that introduces a block, set at the same level as an index entry so
@@ -1347,18 +1550,11 @@ h3 > svg {
    colour, so a reader can scan the page's structure down the left edge. */
 .prose h2 {
   font-size: var(--step-2);
-  margin-block-start: var(--space-l);
-  padding-block-start: var(--space-s);
+  margin-block-start: var(--space-xl);
 }
 
-.prose h2::before {
-  content: "";
-  display: block;
-  inline-size: 38px;
-  block-size: 3px;
-  border-radius: 2px;
-  background: var(--brand);
-  margin-block-end: var(--space-xs);
+.prose > h2:first-child {
+  margin-block-start: 0;
 }
 
 /* Suppress the marker only on the heading that opens the prose block, where the
@@ -1711,6 +1907,7 @@ h3 > svg {
    -------------------------------------------------------------------------- */
 .crumbs {
   padding-inline-start: 0;
+  min-block-size: 2.75rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1744,18 +1941,44 @@ h3 > svg {
 }
 
 .page-head {
-  background: var(--surface);
-  padding-block: var(--space-xl) var(--space-l);
-  border-block-end: 1px solid var(--border);
+  background: var(--band);
+  color: var(--band-text);
+  padding-block: var(--space-m) var(--space-xl);
 }
 
 .page-head__inner {
   display: grid;
   gap: var(--space-s);
+  margin-block-start: var(--space-m);
 }
 
 .page-head h1 {
   max-width: 24ch;
+  color: var(--band-text);
+}
+
+.page-head .lede {
+  color: var(--band-muted);
+  max-width: 60ch;
+}
+
+.page-head .crumbs,
+.page-head .crumbs a,
+.page-head .crumbs li[aria-current] {
+  color: var(--band-muted);
+}
+
+.page-head .crumbs li[aria-current] {
+  color: var(--band-text);
+}
+
+.page-head .crumbs a:hover {
+  color: #fff;
+}
+
+.page-head :focus-visible {
+  outline-color: var(--band-focus);
+  box-shadow: 0 0 0 6px var(--band);
 }
 
 /* --------------------------------------------------------------------------
@@ -1802,6 +2025,7 @@ h3 > svg {
    16. Map & contact
    -------------------------------------------------------------------------- */
 .map-frame {
+  background: var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235e707a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z'/%3E%3Ccircle cx='12' cy='10' r='2.6'/%3E%3C/svg%3E") center / 2.5rem no-repeat;
   border-radius: var(--radius-m);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -1811,7 +2035,7 @@ h3 > svg {
 
 .map-frame iframe {
   inline-size: 100%;
-  block-size: clamp(16rem, 42vw, 24rem);
+  block-size: clamp(16rem, 36vw, 22rem);
   border: 0;
   display: block;
 }
@@ -1826,23 +2050,23 @@ h3 > svg {
 .footer {
   margin-block-start: 0;
   padding-block: var(--space-xl) var(--space-l);
-  background: var(--bg-sunken);
-  border-block-start: 1px solid var(--border);
+  background: var(--band);
+  color: var(--band-muted);
   font-size: 0.93rem;
 }
 
 .footer__grid {
   display: grid;
   gap: var(--space-l);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
 }
 
 .footer h2 {
   font-size: var(--step--1);
   letter-spacing: 0;
-  color: var(--text);
+  color: var(--band-text);
   font-weight: 700;
-  margin-block-end: 0.7rem;
+  margin-block-end: 0.8rem;
 }
 
 .footer ul {
@@ -1850,35 +2074,41 @@ h3 > svg {
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 0.45rem;
+  gap: 0.35rem;
 }
 
 .footer a {
-  color: var(--text-muted);
+  color: var(--band-muted);
   text-decoration: none;
+  display: inline-block;
+  padding-block: 0.15rem;
 }
 
 .footer a:hover {
-  color: var(--brand-text);
+  color: #fff;
   text-decoration: underline;
+}
+
+.footer :focus-visible {
+  outline-color: var(--band-focus);
+  box-shadow: 0 0 0 6px var(--band);
 }
 
 .footer__base {
   margin-block-start: var(--space-l);
   padding-block-start: var(--space-m);
-  border-block-start: 1px solid var(--border);
+  border-block-start: 1px solid var(--band-line);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-s);
+  gap: var(--space-s) var(--space-l);
   justify-content: space-between;
   align-items: baseline;
-  color: var(--text-subtle);
+  color: var(--band-muted);
 }
 
 .footer__base p {
   max-width: 62ch;
 }
-
 
 /* --------------------------------------------------------------------------
    17b. Help band and emergency note
@@ -1886,7 +2116,7 @@ h3 > svg {
    one quiet block in the footer rather than a banner repeated on every page.
    -------------------------------------------------------------------------- */
 .help-band {
-  background: var(--bg-sunken);
+  background: var(--brand-quiet);
   border-block: 1px solid var(--border);
   padding-block: var(--space-l);
 }
@@ -1923,11 +2153,18 @@ h3 > svg {
 .emergency-note {
   display: grid;
   gap: var(--space-2xs);
-  padding: var(--space-s) var(--space-s) var(--space-s) var(--space-xs);
-  border-inline-start: 3px solid var(--red-600);
-  background: var(--red-100);
-  border-radius: var(--radius-xs);
-  margin-block-end: var(--space-l);
+  padding: var(--space-s) var(--space-m);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  border-inline-start: 4px solid #ff9b8c;
+  background: rgb(0 0 0 / 0.2);
+  border-radius: var(--radius-s);
+  margin-block-end: var(--space-xl);
+  color: var(--band-text);
+}
+
+.emergency-note a {
+  color: var(--band-text) !important;
+  text-decoration: underline !important;
 }
 
 .emergency-note p {
@@ -1940,12 +2177,12 @@ h3 > svg {
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  color: var(--text-muted);
-  min-block-size: 1.75rem;
+  color: var(--band-muted);
+  min-block-size: 2rem;
 }
 
 .emergency-note__more summary:hover {
-  color: var(--text);
+  color: #fff;
 }
 
 .emergency-note__more ul {
@@ -1954,12 +2191,14 @@ h3 > svg {
   display: grid;
   gap: 0.25rem;
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: var(--band-muted);
 }
 
 .footer__ack {
-  margin-block-start: var(--space-m);
+  margin-block-start: var(--space-s);
   max-inline-size: 70ch;
+  color: var(--band-muted);
+  opacity: 0.85;
 }
 
 /* Visually hidden, still announced. Used where an icon carries the meaning. */
@@ -2091,20 +2330,28 @@ h3 > svg {
     color: #000;
   }
 
-  .hero {
-    background: #fff;
-    color: #000;
+  .hero,
+  .page-head,
+  .footer,
+  .band {
+    background: #fff !important;
+    color: #000 !important;
     padding-block: 0;
   }
 
-  .coast-banner {
-    display: none;
+  .page-head h1,
+  .page-head .lede,
+  .page-head .crumbs,
+  .page-head .crumbs a,
+  .footer h2,
+  .footer a,
+  .footer p {
+    color: #000 !important;
   }
 
   .hero h1,
   .hero .lede {
-    color: #000;
-    text-shadow: none;
+    color: #000 !important;
   }
 
   a[href^="http"]::after {
@@ -2140,6 +2387,62 @@ h3 > svg {
   .nav__link {
     padding-inline: 0.85rem;
   }
+}
+
+/* --------------------------------------------------------------------------
+   22b. Form controls
+   -------------------------------------------------------------------------- */
+.field {
+  inline-size: 100%;
+  min-block-size: 2.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-s);
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+textarea.field {
+  min-block-size: 8rem;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+select.field {
+  appearance: none;
+  padding-inline-end: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235e707a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.1rem;
+}
+
+.field:hover {
+  border-color: var(--text-subtle);
+}
+
+.field:focus,
+.field:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 0;
+  border-color: var(--brand);
+  box-shadow: none;
+}
+
+.form-grid {
+  display: grid;
+  gap: var(--space-s);
+  margin-block-start: var(--space-s);
+}
+
+.form-grid .field-label {
+  font-size: 0.95rem;
+}
+
+.map-frame__placeholder {
+  display: none;
 }
 
 /* --------------------------------------------------------------------------
@@ -2182,9 +2485,8 @@ h3 > svg {
 
 /* ==========================================================================
    Coffs Colorectal Surgery — design tokens
-   Palette drawn from the place: Coffs Creek estuary sand, coastal banksia,
-   and the deep blue of the Coffs Coast ocean. Clinical calm in the neutrals,
-   warmth and place in the accents.
+   Palette drawn from the place: the deep blue-green of the Coffs Coast water
+   against cool, clean clinical neutrals. One accent, used for what you can act on.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -2375,15 +2677,25 @@ h3 > svg {
      --shadow-m: it reads as ambient depth rather than a drop shadow under a
      hard edge, which is what makes a panel sit on the page instead of being
      outlined on it. */
-  --shadow-panel: 0 1px 2px rgb(8 22 28 / 0.04), 0 8px 24px rgb(8 22 28 / 0.06);
+  --shadow-panel: 0 1px 2px rgb(8 22 28 / 0.05);
   /* The faint wash across a raised surface: white at the top falling to the
      surface tone. Enough to give a panel a light direction, not enough to read
      as a gradient. */
-  --wash-surface: linear-gradient(180deg, rgb(255 255 255 / 0.9), rgb(255 255 255 / 0));
+  --wash-surface: none;
   --shadow-brand: 0 1px 2px rgb(11 86 102 / 0.24), 0 4px 12px rgb(11 86 102 / 0.2);
 
   --hero-tint: rgb(8 22 28 / 0.62);
   --ring: rgb(11 86 102 / 0.4);
+
+  /* The deep band. Page headers and the footer share one dark teal, so every
+     page is bookended by the same colour and the light content sits between. */
+  --band: #0c3945;
+  --band-raised: #14505f;
+  --band-text: #ffffff;
+  --band-muted: #c8dde3;
+  --band-line: rgb(255 255 255 / 0.18);
+  --band-link: #aedbe7;
+  --band-focus: #ffffff;
 }
 
 /* --------------------------------------------------------------------------
@@ -2431,12 +2743,20 @@ h3 > svg {
   --shadow-s: 0 1px 2px rgb(0 0 0 / 0.4);
   --shadow-m: 0 1px 2px rgb(0 0 0 / 0.45), 0 4px 12px rgb(0 0 0 / 0.4);
   --shadow-l: 0 2px 6px rgb(0 0 0 / 0.5), 0 14px 32px rgb(0 0 0 / 0.5);
-  --shadow-panel: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px rgb(0 0 0 / 0.34);
-  --wash-surface: linear-gradient(180deg, rgb(255 255 255 / 0.05), rgb(255 255 255 / 0));
+  --shadow-panel: 0 1px 2px rgb(0 0 0 / 0.3);
+  --wash-surface: none;
   --shadow-brand: 0 1px 2px rgb(0 0 0 / 0.5);
 
   --hero-tint: rgb(3 12 15 / 0.66);
   --ring: rgb(127 185 201 / 0.55);
+
+  --band: #0d2a33;
+  --band-raised: #16414d;
+  --band-text: #f1f7f8;
+  --band-muted: #bcd0d6;
+  --band-line: rgb(255 255 255 / 0.14);
+  --band-link: #9ccfdd;
+  --band-focus: #f1f7f8;
 
   /* Tints are lighter than --surface so a callout or badge reads as a raised
      tone. The previous values were near-black (#3a1410, #2e2410), which left

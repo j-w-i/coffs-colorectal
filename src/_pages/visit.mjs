@@ -43,7 +43,7 @@ ${pageHead(s.title, s.intro, trail)}
       </div>
     </div>
 
-    <div class="grid grid--main-side" style="margin-top:var(--space-xl);align-items:start">
+    <div class="grid grid--main-side" style="margin-top:var(--space-xl)">
       <div class="prose">
         <h2>See your GP about these</h2>
         <p>Most people with these symptoms do not have cancer. But symptoms like
@@ -60,15 +60,15 @@ ${pageHead(s.title, s.intro, trail)}
              paragraph of one note were split into separate columns, and the
              inline margin on the second heading fought the grid's row gap. -->
         <div>
-          <h3 style="font-size:var(--step-1)">${icon("info")} A positive screening test is not a diagnosis</h3>
-          <p style="margin-top:0.5rem">A positive bowel screening test means blood was
+          <h3>${icon("info")} A positive screening test is not a diagnosis</h3>
+          <p>A positive bowel screening test means blood was
           found in your bowel motion. It does <strong>not</strong> mean you have cancer.
           There are many other reasons blood can be present. It does mean you need a
           colonoscopy to find out why.</p>
         </div>
         <div>
-          <h3 style="font-size:var(--step-1)">${icon("clock")} Don't wait for a kit if you have symptoms</h3>
-          <p style="margin-top:0.5rem">Screening tests are designed for people
+          <h3>${icon("clock")} Don't wait for a kit if you have symptoms</h3>
+          <p>Screening tests are designed for people
           <em>without</em> symptoms. If you already have symptoms, see your GP. A
           screening test is not the right test for you.</p>
         </div>
@@ -123,7 +123,7 @@ ${pageHead(
 
 <section class="section">
   <div class="shell">
-    <div class="grid grid--main-side" style="align-items:start">
+    <div class="grid grid--main-side">
       <div class="prose">
         <h2>Do I need a referral?</h2>
         <p>Yes, if you want to claim a Medicare rebate. A referral from your general
@@ -179,8 +179,8 @@ ${pageHead(
 
       <div>
         <div class="panel">
-          <h3 style="font-size:var(--step-1)">${icon("phone")} Book an appointment</h3>
-          <p style="margin-top:0.5rem">Call the practice and we will find a time that
+          <h3>${icon("phone")} Book an appointment</h3>
+          <p>Call the practice and we will find a time that
           suits you. Please have your referral and Medicare card details with you.</p>
           <p style="margin-top:var(--space-s)">
             <a class="btn btn--primary" href="tel:${TEL}">Call ${escapeHTML(site.contact.phone)}</a>
@@ -191,7 +191,7 @@ ${pageHead(
           </dl>
         </div>
 
-        <div class="callout callout--info" style="margin-top:var(--space-m)">
+        <div class="callout callout--info">
           ${icon("info")}
           <div>
             <p class="callout__title">Cancellations</p>
@@ -360,7 +360,7 @@ ${pageHead(
       </div>
     </div>
 
-    <div class="grid grid--main-side" style="margin-top:var(--space-xl);align-items:start">
+    <div class="grid grid--main-side" style="margin-top:var(--space-xl)">
       <div class="prose">
         <h2>A few days before</h2>
         <p>You will be asked to eat a low-fibre diet for the day or two before your
@@ -419,8 +419,8 @@ ${pageHead(
 
       <div>
         <div class="panel">
-          <h3 style="font-size:var(--step-1)">${icon("clock")} The procedure itself</h3>
-          <ul style="margin-top:0.6rem;padding-left:1.2rem;display:grid;gap:0.45rem">
+          <h3>${icon("clock")} The procedure itself</h3>
+          <ul>
             <li>The examination itself usually takes 20 to 30 minutes, though you should expect to be at the hospital or day surgery unit for three to four hours in total.</li>
             <li>Performed under sedation or a light general anaesthetic, and most people remember nothing of it.</li>
             <li>Generally not painful. Air used to inflate the bowel can cause bloating or wind afterwards.</li>
@@ -429,7 +429,7 @@ ${pageHead(
           </ul>
         </div>
 
-        <div class="callout callout--urgent" style="margin-top:var(--space-m)">
+        <div class="callout callout--urgent">
           ${icon("alert")}
           <div>
             <p class="callout__title">After sedation, for 24 hours</p>
@@ -442,7 +442,7 @@ ${pageHead(
           </div>
         </div>
 
-        <div class="callout callout--info" style="margin-top:var(--space-m)">
+        <div class="callout callout--info">
           ${icon("info")}
           <div>
             <p class="callout__title">Contact us if</p>
@@ -456,9 +456,9 @@ ${pageHead(
           </div>
         </div>
 
-        <div class="panel" style="margin-top:var(--space-m)">
-          <h3 style="font-size:var(--step-1)">${icon("print")} Printing this page</h3>
-          <p style="margin-top:0.5rem">This page prints cleanly. Use your browser's
+        <div class="panel">
+          <h3>${icon("print")} Printing this page</h3>
+          <p>This page prints cleanly. Use your browser's
           print function to keep a copy, and bring it with you if it helps.</p>
         </div>
       </div>
@@ -530,7 +530,7 @@ ${pageHead(a.title, a.intro, trail)}
       </div>
     </div>
 
-    <div class="grid grid--main-side" style="margin-top:var(--space-xl);align-items:start">
+    <div class="grid grid--main-side" style="margin-top:var(--space-xl)">
       <div class="prose">
         <h2>Hospital stay and going home</h2>
         <p>How long you stay depends on the operation, whether it was done
@@ -589,8 +589,8 @@ ${pageHead(a.title, a.intro, trail)}
 
       <div>
         <div class="panel">
-          <h3 style="font-size:var(--step-1)">${icon("clock")} A rough guide to recovery</h3>
-          <dl class="deflist" style="margin-top:0.6rem">
+          <h3>${icon("clock")} A rough guide to recovery</h3>
+          <dl class="deflist" style="margin-top:var(--space-xs)">
             <div><dt>Laparoscopic surgery</dt><dd>Home in about 3–4 days</dd></div>
             <div><dt>Open surgery</dt><dd>Average 8–10 days in hospital</dd></div>
             <div><dt>Back to light activity</dt><dd>Within a few weeks</dd></div>
@@ -601,7 +601,7 @@ ${pageHead(a.title, a.intro, trail)}
           guides only. Your own recovery depends on the operation and on you.</p>
         </div>
 
-        <div class="callout callout--info" style="margin-top:var(--space-m)">
+        <div class="callout callout--info">
           ${icon("shield")}
           <div>
             <p class="callout__title">Enhanced recovery</p>
@@ -611,7 +611,7 @@ ${pageHead(a.title, a.intro, trail)}
           </div>
         </div>
 
-        <div class="callout callout--note" style="margin-top:var(--space-m)">
+        <div class="callout callout--note">
           ${icon("info")}
           <div>
             <p class="callout__title">If you have a stoma</p>
@@ -716,7 +716,7 @@ function resourcesPage() {
     ${groups
       .map(
         (g) => `<div style="margin-top:var(--space-xl)">
-      <h2 style="font-size:var(--step-2)">${escapeHTML(g.title)}</h2>
+      <h2 class="h-section">${escapeHTML(g.title)}</h2>
       <p class="muted" style="margin-top:0.35rem;max-width:60ch">${escapeHTML(g.blurb)}</p>
       <div class="index" style="margin-top:var(--space-m)">
         ${g.links
@@ -733,7 +733,7 @@ function resourcesPage() {
       .join("\n    ")}
 
     <div style="margin-top:var(--space-xl)">
-      <h2 style="font-size:var(--step-2)">Local support group</h2>
+      <h2 class="h-section">Local support group</h2>
       <div class="panel" style="margin-top:var(--space-s);max-width:64ch">
         <p>A bowel cancer support group meets in Coffs Harbour on the first Monday of
         each month at Baringa Private Hospital. For details, call
@@ -766,9 +766,9 @@ function contactPage() {
 
 <section class="section">
   <div class="shell">
-    <div class="grid grid--2" style="align-items:start;gap:var(--space-xl)">
+    <div class="grid grid--2 contact-grid">
       <div>
-        <h2 style="font-size:var(--step-2)">Practice details</h2>
+        <h2 class="h-section">Practice details</h2>
         <dl class="deflist" style="margin-top:var(--space-s)">
           <div><dt>Address</dt><dd>${escapeHTML(site.contact.street)}<br>${escapeHTML(site.contact.suburb)} ${escapeHTML(site.contact.state)} ${escapeHTML(site.contact.postcode)}</dd></div>
           <div><dt>Telephone</dt><dd><a href="tel:${TEL}">${escapeHTML(site.contact.phone)}</a></dd></div>
@@ -777,7 +777,7 @@ function contactPage() {
           <div><dt>Consulting hours</dt><dd>${site.contact.hours.map((h) => `${escapeHTML(h.days)}: ${escapeHTML(h.time)}`).join("<br>")}</dd></div>
         </dl>
 
-        <h2 style="font-size:var(--step-2);margin-top:var(--space-xl)">Getting here</h2>
+        <h2 class="h-section" style="margin-top:var(--space-xl)">Getting here</h2>
         <div class="prose" style="margin-top:var(--space-xs)">
           <p>${escapeHTML(site.contact.landmark)} Suite 4 is on the first floor. There is
           a lift and a staircase from the ground-floor entry.</p>
@@ -822,31 +822,27 @@ function contactPage() {
         </div>
 
         <form class="card" style="margin-top:var(--space-m)" action="mailto:${escapeHTML(site.contact.email)}" method="post" enctype="text/plain">
-          <h2 style="font-size:var(--step-1)">Send a non-clinical enquiry</h2>
+          <h2>Send a non-clinical enquiry</h2>
           <p class="small muted" style="margin-top:0.35rem">Use this form only for
           administrative enquiries, for example confirming our address, asking about
           opening hours, or requesting a copy of our fee schedule.</p>
 
-          <div style="margin-top:var(--space-s);display:grid;gap:var(--space-s)">
+          <div class="form-grid">
             <div>
               <label class="field-label" for="name">Your name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required
-                     style="width:100%;min-height:2.75rem;padding:0.6rem 0.7rem;border:1px solid var(--border-strong);border-radius:var(--radius-s);background:var(--surface)">
+              <input class="field" id="name" name="name" type="text" autocomplete="name" required>
             </div>
             <div>
               <label class="field-label" for="phone">Phone number</label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" required
-                     style="width:100%;min-height:2.75rem;padding:0.6rem 0.7rem;border:1px solid var(--border-strong);border-radius:var(--radius-s);background:var(--surface)">
+              <input class="field" id="phone" name="phone" type="tel" autocomplete="tel" required>
             </div>
             <div>
               <label class="field-label" for="email">Email address</label>
-              <input id="email" name="email" type="email" autocomplete="email"
-                     style="width:100%;min-height:2.75rem;padding:0.6rem 0.7rem;border:1px solid var(--border-strong);border-radius:var(--radius-s);background:var(--surface)">
+              <input class="field" id="email" name="email" type="email" autocomplete="email">
             </div>
             <div>
               <label class="field-label" for="reason">Reason for enquiry</label>
-              <select id="reason" name="reason"
-                      style="width:100%;min-height:2.75rem;padding:0.6rem 0.7rem;border:1px solid var(--border-strong);border-radius:var(--radius-s);background:var(--surface)">
+              <select class="field" id="reason" name="reason">
                 <option>General administrative question</option>
                 <option>Opening hours or location</option>
                 <option>Fees and billing</option>
@@ -857,9 +853,8 @@ function contactPage() {
             </div>
             <div>
               <label class="field-label" for="message">Message</label>
-              <textarea id="message" name="message" rows="4"
-                        aria-describedby="message-hint"
-                        style="width:100%;padding:0.6rem 0.7rem;border:1px solid var(--border-strong);border-radius:var(--radius-s);background:var(--surface)"></textarea>
+              <textarea class="field" id="message" name="message" rows="4"
+                        aria-describedby="message-hint"></textarea>
               <p id="message-hint" class="small muted" style="margin-top:0.3rem">
                 Please do not describe symptoms, diagnoses or test results here.
               </p>

@@ -20,11 +20,11 @@ export function render() {
   {
     const h = site.home;
     const body = `
-<section class="hero">
+<section class="hero band">
   <div class="shell hero__inner">
     <div class="hero__copy">
       <h1>${escapeHTML(h.heroTitle)}</h1>
-      <p class="lede" style="margin-top:var(--space-s)">${inline(h.heroLede)}</p>
+      <p class="lede" style="margin-top:var(--space-m)">${inline(h.heroLede)}</p>
       <p class="hero__actions">
         <a class="btn btn--primary" href="tel:${TEL}">${icon("phone")}Call ${escapeHTML(site.contact.phone)}</a>
         <a class="btn btn--ghost" href="/dr-andrew-sutherland/">Meet Dr Andrew Sutherland</a>
@@ -52,23 +52,13 @@ export function render() {
   </div>
 </section>
 
-<div class="coast-banner" aria-hidden="true">  <div class="coast-banner__media">
-    <picture>
-      <source srcset="/media/coffs-creek-estuary.webp" type="image/webp">
-      <img src="/media/coffs-creek-estuary.jpg" alt="" width="800" height="150" fetchpriority="high" decoding="async">
-    </picture>
-  </div>
-  <div class="shell coast-banner__caption">Coffs Harbour &amp; the Mid North Coast</div>
-</div>
-
 <section class="section" aria-labelledby="start-h">
   <div class="shell">
     <div class="section-head">
       <div>
         <h2 id="start-h">Where would you like to go?</h2>
       </div>
-      <p class="muted" style="max-width:38ch">If you are not sure which section you
-      need, start with the symptom list. It will point you in the right direction.</p>
+      <p class="muted" style="max-width:40ch">Not sure where to begin? Start with the symptom list. It will point you in the right direction.</p>
     </div>
     <div class="routemap">
       ${[
@@ -92,40 +82,51 @@ export function render() {
 
 <section class="section section--sunken" aria-labelledby="about-h">
   <div class="shell">
-    <div class="grid grid--main-side" style="align-items:center;gap:var(--space-xl)">
+    <div class="about-split">
       <div class="prose">
         <h2 id="about-h">${escapeHTML(site.practice.name)}</h2>
         <p>${inline(site.practice.intro)}</p>
         ${prose(h.about)}
+        <p><a class="btn btn--quiet" href="/contact-us/">${icon("pin")}Location and directions</a></p>
       </div>
-      <figure style="margin:0">
-        <img class="figure-img" src="/media/29-orlando-street.webp"
-             width="1260" height="340"
-             alt="The building at 29 Orlando Street, Coffs Harbour, where the practice is located."
-             loading="lazy" decoding="async">
-        <figcaption class="small subtle" style="margin-top:0.6rem">
-          Suite 4, 29 Orlando Street, Coffs Harbour, opposite NBN and Cooper's Surf Shop.
-        </figcaption>
-      </figure>
+      <div class="about-split__media">
+        <figure>
+          <picture>
+            <source srcset="/media/29-orlando-street-960.webp 960w, /media/29-orlando-street-640.webp 640w" sizes="(min-width: 62rem) 32rem, 100vw" type="image/webp">
+            <img class="figure-img" src="/media/29-orlando-street-960.jpg" width="960" height="259"
+                 alt="The building at 29 Orlando Street, Coffs Harbour, where the practice is located."
+                 loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Suite 4, 29 Orlando Street, Coffs Harbour, opposite NBN and Cooper's Surf Shop.</figcaption>
+        </figure>
+        <figure>
+          <picture>
+            <source srcset="/media/coffs-creek-estuary.webp" type="image/webp">
+            <img class="figure-img" src="/media/coffs-creek-estuary.jpg" width="800" height="150"
+                 alt="Coffs Creek meeting the ocean at Coffs Harbour." loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Coffs Creek estuary, a short walk from the rooms.</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section" aria-labelledby="bc-h">
   <div class="shell">
-    <div class="grid grid--main-side" style="align-items:start">
+    <div class="grid grid--main-side">
       <div class="prose">
         <h2 id="bc-h">${escapeHTML(h.screening.title)}</h2>
         ${prose(h.screening.body)}
       </div>
       <div class="card">
-        <h3 style="font-size:var(--step-1)">${icon("info")} Symptoms worth checking</h3>
-        <p class="small muted" style="margin-top:0.4rem">Most people with these
+        <h3>${icon("info")} Symptoms worth checking</h3>
+        <p class="small muted">Most people with these
         symptoms do not have cancer, but they should be checked by a GP.</p>
-        <ul style="margin-top:var(--space-xs);padding-left:1.2rem;display:grid;gap:0.4rem">
+        <ul>
           ${h.screening.symptoms.map((s) => `<li>${inline(s)}</li>`).join("\n          ")}
         </ul>
-        <p style="margin-top:var(--space-s)">
+        <p style="margin-top:var(--space-m)">
           <a class="btn btn--quiet" href="/your-visit/symptoms/">More about symptoms</a>
         </p>
       </div>
